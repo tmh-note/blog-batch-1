@@ -2,6 +2,8 @@
 
 include_once './init.php';
 
+include app_path('middleware/guest.php');
+
 $errors = [];
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -43,7 +45,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="card-body">
                         <form method="POST">
                             <div>
-                                <input type="text" name="name" 
+                                <input 
+                                type="text" 
+                                name="name" 
+                                placeholder="Enter Name"
                                 class="form-control  <?php if(isset($errors['name'])): ?> is-invalid <?php endif; ?>">
                                 <?php if(isset($errors['name'])): ?>
                                 <div class="invalid-feedback"><?php echo $errors['name']; ?></div>
@@ -51,7 +56,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
 
                             <div class="mt-3">
-                                <input type="email" name="email" 
+                                <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="Enter Email"
                                 class="form-control  <?php if(isset($errors['email'])): ?> is-invalid <?php endif; ?>">
                                 <?php if(isset($errors['email'])): ?>
                                     <div class="invalid-feedback"><?php echo $errors['email']; ?></div>
@@ -59,7 +67,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
 
                             <div class="mt-3">
-                                <input type="password" name="password" 
+                                <input 
+                                type="password" 
+                                name="password" 
+                                placeholder="Enter Password"
                                 class="form-control  <?php if(isset($errors['password'])): ?> is-invalid <?php endif; ?>">
                                 <?php if(isset($errors['password'])): ?>
                                     <div class="invalid-feedback"><?php echo $errors['password']; ?></div>
@@ -68,6 +79,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             <button type="submit" class="btn btn-primary w-100 mt-3">Register</button>
                         </form>
+                    </div>
+
+                    <div class="card-footer">
+                        Already registrated? <a href="<?php echo url('login.php'); ?>">Login</a>
                     </div>
                 </div>
             </div>

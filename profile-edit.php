@@ -1,9 +1,7 @@
 <?php
 include_once './init.php';
 
-if(!isset($_SESSION['auth'])) {
-    redirect('login.php');
-}
+include app_path('middleware/auth.php');
 
 $id = $_SESSION['auth']['id'];
 $sql = "SELECT * FROM users WHERE id='$id'";

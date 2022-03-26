@@ -1,6 +1,8 @@
 <?php
     include_once './init.php';
 
+    include app_path('middleware/guest.php');
+
     $errors = [];
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -60,6 +62,9 @@
 
                             <button type="submit" class="btn btn-primary w-100 mt-3">Login</button>
                         </form>
+                    </div>
+                    <div class="card-footer">
+                        Not registrator? <a href="<?php echo url('register.php'); ?>">Register</a>
                     </div>
                 </div>
             </div>
