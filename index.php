@@ -29,7 +29,7 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         <?php echo $post['author']; ?>
                         </b></small>
                         <div class="float-end">
-                            <a href="<?php echo url('post-edit.php'); ?>" class="btn btn-success">Edit</a>
+                            <a href="<?php echo url('post-edit.php?post_id=' . $post['id']); ?>" class="btn btn-success">Edit</a>
                             <a 
                             href="<?php echo url('post-delete.php?post_id=' . $post['id']); ?>" 
                             class="btn btn-danger">Delete</a>
