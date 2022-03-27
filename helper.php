@@ -19,3 +19,17 @@ function redirect($url) {
 function url($url) {
     return APP_URL . '/' . $url;
 }
+
+function flash(string $key,string $value = null) {
+    if(! $value) {
+        $message = $_SESSION[$key];
+        unset($_SESSION[$key]);
+        return $message;
+    }
+
+    $_SESSION[$key] = $value;
+}
+
+function flash_has(string $key): bool {
+    return isset($_SESSION[$key]);
+}

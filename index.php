@@ -3,7 +3,7 @@ include_once './init.php';
 
 include app_path('middleware/auth.php');
 
-$sql = "SELECT * FROM posts";
+$sql = "SELECT posts.*, users.name as author FROM posts LEFT JOIN users ON users.id=posts.user_id";
 $result = mysqli_query($conn, $sql);
 $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -14,6 +14,7 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 <div class="container">
     <div class="row">
+        <?php include app_path('alert.php'); ?>
         <?php foreach($posts as $post): ?>
         <div class="col-12 mt-3">
             <a href="#" class="text-decoration-none text-black">
@@ -25,17 +26,13 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <div class="card-footer ">
                         <small>Posted on <i><?php echo date('M d, Y', strtotime($post['date'])); ?></i> by 
                         <b>
-                        <?php
-                            $userId = $post['user_id'];
-                            $sql = "SELECT * FROM users WHERE id='$userId'";
-                            $result = mysqli_query($conn, $sql);
-                            $user = mysqli_fetch_assoc($result);
-                            echo $user['name'];
-                        ?>
+                        <?php echo $post['author']; ?>
                         </b></small>
                         <div class="float-end">
                             <a href="<?php echo url('post-edit.php'); ?>" class="btn btn-success">Edit</a>
-                            <a href="<?php echo url('post-delete.php'); ?>" class="btn btn-danger">Delete</a>
+                            <a 
+                            href="<?php echo url('post-delete.php?post_id=' . $post['id']); ?>" 
+                            class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 </div>
